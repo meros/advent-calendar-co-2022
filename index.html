@@ -1,0 +1,69 @@
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2ecc71;
+    }
+    p.today {
+      text-align: center;
+      font-weight: bold;
+      font-size: larger;
+      color: #2ecc71;
+    }
+    table {
+      margin: auto;
+      width: 75%;
+      font-size: smaller;
+      border-collapse: collapse;
+    }
+    tr:nth-child(odd) {
+      background-color: #eee;
+    }
+    td.today {
+      font-weight: bold;
+      font-size: larger;
+      color: #2ecc71;
+    }
+  </style>
+  <script>
+    // Get the current date
+    var today = new Date();
+    var currentDay = today.getDate();
+
+    // Determine who should open the TV and Radio calendars
+    var children = ["Maja", "Ebba", "Melvin"];
+    var tvChild = children[(currentDay + 2) % 3];
+    var radioChild = children[(currentDay + 3) % 3];
+
+    // Display today's kids in larger text
+    document.write("<p class='today'>Today's kids: " + tvChild + " and " + radioChild + "</p>");
+
+    // Create a table to display the results
+    document.write("<h1>Advent Calendar Schedule</h1>");
+    document.write("<table>");
+    document.write(
+      "<tr><th>Day</th><th>TV Calendar</th><th>Radio Calendar</th></tr>"
+    );
+
+    // Loop through the remaining days
+    for (var i = currentDay; i <= 24; i++) {
+      var tvChild = children[(i + 2) % 3];
+      var radioChild = children[(i + 3) % 3];
+      var todayClass = (i === currentDay) ? " class='today'" : "";
+      document.write("<tr>");
+      document.write("<td" + todayClass + ">" + i + "</td>");
+      document.write("<td" + todayClass + ">" + tvChild + "</td>");
+      document.write("<td" + todayClass + ">" + radioChild + "</td>");
+      document.write("</tr>");
+    }
+
+    document.write("</table>");
+    document.write("<p>&copy; 2022 Advent Calendar Co.</p>");
+  </script>
+</head>
+</html>
