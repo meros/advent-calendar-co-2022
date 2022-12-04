@@ -1,69 +1,105 @@
 <html>
-<head>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #2ecc71;
-    }
-    p.today {
-      text-align: center;
-      font-weight: bold;
-      font-size: larger;
-      color: #2ecc71;
-    }
-    table {
-      margin: auto;
-      width: 75%;
-      font-size: smaller;
-      border-collapse: collapse;
-    }
-    tr:nth-child(odd) {
-      background-color: #eee;
-    }
-    td.today {
-      font-weight: bold;
-      font-size: larger;
-      color: #2ecc71;
-    }
-  </style>
-  <script>
-    // Get the current date
-    var today = new Date();
-    var currentDay = today.getDate();
+  <head>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #ddd;
+        background-color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        color: #2ecc71;
+      }
+      p.today {
+        text-align: center;
+        font-weight: bold;
+        font-size: larger;
+        color: #2ecc71;
+      }
+      table {
+        margin: auto;
+        width: 100%;
+        font-size: smaller;
+        border-collapse: collapse;
+        background-color: #222;
+      }
+      td,
+      th {
+        border: 1px solid #ccc;
+        padding: 5px;
+        text-align: center;
+      }
+      td.today {
+        font-weight: bold;
+        font-size: larger;
+        color: #2ecc71;
+      }
+      @media only screen and (max-width: 600px) {
+        body {
+          font-size: 12px;
+        }
+        h1 {
+          font-size: 16px;
+        }
+        p.today {
+          font-size: 14px;
+        }
+        table {
+          font-size: 12px;
+        }
+      }
+    </style>
+    <script>
+      // Get the current date and the date of Christmas Eve
+      var today = new Date();
+      var currentDay = today.getDate();
+      var christmasEve = new Date(today.getFullYear(), 11, 24);
+      // Calculate the number of days until Christmas Eve
+      var daysUntilChristmasEve = Math.ceil(
+        (christmasEve - today) / (1000 * 60 * 60 * 24)
+      );
+      // Determine who should open the Christmas calendars
+      var children = ["Maja", "Ebba", "Melvin"];
+      var christmasCalendar1 = children[(currentDay + 2) % 3];
+      var christmasCalendar2 = children[(currentDay + 3) % 3];
 
-    // Determine who should open the TV and Radio calendars
-    var children = ["Maja", "Ebba", "Melvin"];
-    var tvChild = children[(currentDay + 2) % 3];
-    var radioChild = children[(currentDay + 3) % 3];
+      // Display today's kids and the days remaining until Christmas Eve in larger text
+      document.write(
+        "<p class='today'>Today's kids: " +
+          christmasCalendar1 +
+          " and " +
+          christmasCalendar2 +
+          "<br>Days until Christmas Eve: " +
+          daysUntilChristmasEve +
+          "</p>"
+      );
 
-    // Display today's kids in larger text
-    document.write("<p class='today'>Today's kids: " + tvChild + " and " + radioChild + "</p>");
+      // Create a table to display the results
+      document.write("<h1>Christmas Calendar Schedule</h1>");
+      document.write("<table>");
+      document.write(
+        "<tr><th>Day</th><th>Christmas Calendar 1</th><th>Christmas Calendar 2</th></tr>"
+      );
 
-    // Create a table to display the results
-    document.write("<h1>Advent Calendar Schedule</h1>");
-    document.write("<table>");
-    document.write(
-      "<tr><th>Day</th><th>TV Calendar</th><th>Radio Calendar</th></tr>"
-    );
+      // Loop through the remaining days
+      for (var i = currentDay; i <= 24; i++) {
+        var christmasCalendar1 = children[(i + 2) % 3];
+        var christmasCalendar2 = children[(i + 3) % 3];
+        var todayClass = i === currentDay ? " class='today'" : "";
+        document.write("<tr>");
+        document.write("<td" + todayClass + ">" + i + "</td>");
+        document.write("<td" + todayClass + ">" + christmasCalendar1 + "</td>");
+        document.write("<td" + todayClass + ">" + christmasCalendar2 + "</td>");
+        document.write("</tr>");
+      }
 
-    // Loop through the remaining days
-    for (var i = currentDay; i <= 24; i++) {
-      var tvChild = children[(i + 2) % 3];
-      var radioChild = children[(i + 3) % 3];
-      var todayClass = (i === currentDay) ? " class='today'" : "";
-      document.write("<tr>");
-      document.write("<td" + todayClass + ">" + i + "</td>");
-      document.write("<td" + todayClass + ">" + tvChild + "</td>");
-      document.write("<td" + todayClass + ">" + radioChild + "</td>");
-      document.write("</tr>");
-    }
-
-    document.write("</table>");
-    document.write("<p>&copy; 2022 Advent Calendar Co.</p>");
-  </script>
-</head>
+      document.write("</table>");
+      document.write("<p>&copy; 2022 Christmas Calendar Co.</p>");
+    </script>
+  </head>
+  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </body>
 </html>
